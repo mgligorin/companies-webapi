@@ -13,7 +13,7 @@ namespace MiroslavGligorinFinalniTest.Models
         [StringLength(60)]
         public string Naziv { get; set; }
         [Required]
-        [Range(1900, 2000)]
+        [Range(1901, 2000)]
         public int GodinaOsnivanja { get; set; }
     }
 }
