@@ -1,0 +1,108 @@
+﻿@section Scripts {
+    @Scripts.Render("~/Scripts/Skripta.js")
+}
+
+<div class="row" style="width: 80%; margin: 0 auto; padding: 10px; position: relative;">
+    <div class="col-sm-4" id="registracijaIPrijava" style="width: 100%; text-align: center">
+        <h3><b>Korisnik nije prijavljen na sistem!</b></h3>
+        <br />
+        <button class="btn btn-warning" id="btnRegistracijaIPrijava">Registracija i Prijava</button>
+    </div>
+    <div class="col-sm-4" id="registracija" style="display: none">
+        <button class="btn btn-warning" id="btnPocetak">Pocetak</button>
+        <br />
+        <br />
+        <div class="form-group">
+            <button type="submit" class="btn btn-default" id="btnRegistracija">Registracija</button>
+            <button type="submit" class="btn btn-default" id="btnPrijava">Prijava</button>
+        </div>
+        <form method="post" action="post/" id="registracija">
+            <h3>Registracija</h3>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="text" id="regEmail" />
+            </div>
+            <div class="form-group">
+                <label>Lozinka</label>
+                <input class="form-control" type="password" id="regLoz" />
+            </div>
+            <div class="form-group">
+                <label>Potvrdi Lozinku</label>
+                <input class="form-control" type="password" id="regLoz2" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-4" id="prijava" style="display: none">
+        <button class="btn btn-warning" id="btnPocetak">Pocetak</button>
+        <br />
+        <br />
+        <div class="form-group">
+            <button type="submit" class="btn btn-default" id="btnRegistracija">Registracija</button>
+            <button type="submit" class="btn btn-default" id="btnPrijava">Prijava</button>
+        </div>
+        <form method="post" action="post/" id="prijava">
+            <h3>Prijava</h3>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="text" id="priEmail" />
+            </div>
+            <div class="form-group">
+                <label>Lozinka</label>
+                <input class="form-control" type="password" id="priLoz" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div class="row">
+    <p id="info"></p>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-4" id="odjava">
+        <button class="btn btn-warning" id="odjavise">Odjava</button>
+    </div>
+    <br />
+    <div class="container" style="display:inline-block">
+        <div id="formsearch" style="display:none; float: left; text-align: center;">
+            <form method="post" action="post/" id="searchForm">
+                <h2>Pretraga zaposlenih po godini zaposlenja:</h2>
+                <p><label>Od: <input type="number" id="godinaOd"></label></p>
+                <br />
+                <p><label>Do: <input type="number" id="godinaDo"></label></p>
+                <br />
+                <div class="row">
+                    <button class="button btn-primary">Pretraga</button>
+                    <input class="button btn-primary" type="button" value="Reset" id="btnReset" />
+                </div>
+            </form>
+        </div>
+        <div id="zaposleni" style="float: left; margin-left: 10%">
+        </div>
+    </div>
+    <br />
+    <div id="formZaposleniDiv" style="display:none">
+        <h2>Izmena zaposlenih</h2>
+        <form method="put" action="put/" id="zaposleniForm">
+            <p><label>Kompanija: <select id="kompanija"></select></label></p>
+            <p><label>Ime i prezime: <input id="imeIPrezime"></label></p>
+            <br />
+            <p><label>Godina rodjenja: <input type="number" id="rodjenje"></label></p>
+            <br />
+            <p><label>Godina zaposlenja: <input type="number" id="zaposlenje"></label></p>
+            <br />
+            <p><label>Plata: <input type="number" id="plata"></label></p>
+            <br />
+            <div class="row">
+                <button class="button btn-primary">Izmena</button>
+                <input class="button btn-primary" type="button" value="Odustajanje" id="btnOdustajanje" />
+            </div>
+        </form>
+    </div>
+</div>
