@@ -22,8 +22,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
         {
             return _repository.GetAll();
         }
-
-        [Authorize]
+        
         public IHttpActionResult Get(int id)
         {
             var kompanija = _repository.GetById(id);
@@ -33,8 +32,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
             }
             return Ok(kompanija);
         }
-
-        [Authorize]
+        
         [HttpGet]
         [Route("api/tradicija")]
         public IEnumerable<Kompanija> GetTradition()
