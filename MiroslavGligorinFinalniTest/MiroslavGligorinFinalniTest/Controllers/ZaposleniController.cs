@@ -41,6 +41,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
             }
 
             _repository.Add(zaposleni);
+            zaposleni = _repository.GetById(zaposleni.Id);
             return CreatedAtRoute("DefaultApi", new { id = zaposleni.Id }, zaposleni);
         }
 
@@ -60,6 +61,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
             try
             {
                 _repository.Update(zaposleni);
+                zaposleni = _repository.GetById(zaposleni.Id);
             }
             catch
             {
