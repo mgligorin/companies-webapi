@@ -129,13 +129,13 @@
             data: sendData
 
         }).done(function (data) {
-            $("#info").append("Uspešna registracija. Možete se prijaviti na sistem.");
+            alert("Uspešna registracija na sistem!");
             $("#regEmail").val('');
             $("#regLoz").val('');
             $("#regLoz2").val('');
 
         }).fail(function (data) {
-            alert(data);
+            alert('Greška prilikom registracije! Proverite unos!');
         });
     });
 
@@ -171,7 +171,7 @@
             refreshTable();
 
         }).fail(function (data) {
-            alert(data);
+            alert('Greška prilikom prijave');
         });
     });
 
@@ -287,7 +287,7 @@
                 setZaposleni(data, status);
             })
             .fail(function (data, status) {
-                alert("Desila se greska!");
+                alert("Greška prilikom pretrage!");
             });
     });
 
