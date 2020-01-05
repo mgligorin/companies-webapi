@@ -70,7 +70,7 @@
             if (token) {
                 var header = $("<thead><tr><td>Ime i prezime</td><td>Godina rodjenja</td><td>Godina zaposlenja</td><td>Kompanija</td><td>Plata</td><td>Brisanje</td><td>Izmena</td></tr></thead>");
             } else {
-                var header = $("<thead><tr><td>Ime i prezime</td><td>Godina rodjenja</td><td>Godina zaposlenja</td><td>Kompanija</td><td>Plata</td></tr></thead>");
+                var header = $("<thead><tr><td>Ime i prezime</td><td>Godina rodjenja</td><td>Godina zaposlenja</td><td>Kompanija</td></tr></thead>");
             }
             
             table.append(header);
@@ -79,14 +79,14 @@
                 // prikazujemo novi red u tabeli
                 var row = "<tr>";
                 // prikaz podataka
-                var displayData = "<td>" + data[i].ImeIPrezime + "</td><td>" + data[i].GodinaRodjenja + "</td><td>" + data[i].GodinaZaposlenja + "</td><td>" + data[i].Kompanija.Naziv + "</td><td>" + data[i].Plata + "</td>";
+                var displayData = "<td>" + data[i].ImeIPrezime + "</td><td>" + data[i].GodinaRodjenja + "</td><td>" + data[i].GodinaZaposlenja + "</td><td>" + data[i].Kompanija.Naziv + "</td>";
                 // prikaz dugmadi za izmenu i brisanje
                 var stringId = data[i].Id.toString();
                 var displayDelete = "<td><button id=btnDelete name=" + stringId + ">Delete</button></td>";
                 var displayEdit = "<td><button id=btnEdit name=" + stringId + ">Edit</button></td>";
                 // prikaz samo ako je korisnik prijavljen
                 if (token) {
-                    row += displayData + displayDelete + displayEdit + "</tr>";
+                    row += displayData + "<td>" + data[i].Plata + "</td>" + displayDelete + displayEdit + "</tr>";
                 } else {
                     row += displayData + "</tr>";
                 }
@@ -130,6 +130,9 @@
 
         }).done(function (data) {
             $("#info").append("Uspešna registracija. Možete se prijaviti na sistem.");
+            $("#regEmail").val('');
+            $("#regLoz").val('');
+            $("#regLoz2").val('');
 
         }).fail(function (data) {
             alert(data);
@@ -184,7 +187,7 @@
         $("#odjava").css("display", "none");
         $("#info").empty();
         $("#sadrzaj").empty();
-        $("#formProductDiv").css("display", "none");
+        $("#formZaposleniDiv").css("display", "none");
         $("#formsearch").css("display", "none");
         refreshTable();
     });
@@ -246,7 +249,7 @@
                 $("#formZaposleniDiv").css("display", "none");
             })
             .fail(function (data, status) {
-                alert("Desila se greska!");
+                alert("Greška prilikom izmene!");
             });
     });
 
@@ -266,7 +269,7 @@
         var url;
 
         httpAction = "POST";
-        url = 'http://' + host + "/api/pretraga/";
+        url = 'http://' + host + "/api/Zaposlenje/";
         sendData = {
             "Pocetak": godinaOd,
             "Kraj": godinaDo
@@ -353,8 +356,8 @@
         })
             .done(function (data, status) {
                 $("#imeIPrezime").val(data.ImeIPrezime);
-                $("#godinaRodjenja").val(data.GodinaRodjenja);
-                $("#godinaZaposlenja").val(data.GodinaZaposlenja);
+                $("#rodjenje").val(data.GodinaRodjenja);
+                $("#zaposlenje").val(data.GodinaZaposlenja);
                 $("#plata").val(data.Plata);
                 $("#kompanija").val(data.KompanijaId);
                 editingId = data.Id;
@@ -362,7 +365,7 @@
             })
             .fail(function (data, status) {
                 formAction = "Create";
-                alert("Desila se greska!");
+                alert("Greška prilikom izmene!");
             });
     }
 
@@ -370,8 +373,8 @@
     function refreshTable() {
         // cistim formu
         $("#imeIPrezime").val('');
-        $("#godinaRodjenja").val('');
-        $("#godinaZaposlenja").val('');
+        $("#rodjenje").val('');
+        $("#zaposlenje").val('');
         $("#plata").val('');
         $("#kompanija").val('');
         // osvezavam
@@ -380,8 +383,8 @@
 
     function formaOdustajanje() {
         $("#imeIPrezime").val('');
-        $("#godinaRodjenja").val('');
-        $("#godinaZaposlenja").val('');
+        $("#rodjenje").val('');
+        $("#zaposlenje").val('');
         $("#plata").val('');
         $("#kompanija").val('');
         loadZaposleni();
