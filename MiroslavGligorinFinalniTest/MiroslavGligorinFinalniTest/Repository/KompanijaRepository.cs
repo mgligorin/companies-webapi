@@ -2,8 +2,10 @@
 using MiroslavGligorinFinalniTest.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -43,16 +45,17 @@ namespace MiroslavGligorinFinalniTest.Repository
 
         public IEnumerable<KompanijaDTO> GetStatistics()
         {
-            var kompanije = (from t in db.Kompanija
-                          join z in db.Zaposleni on t.Id equals z.KompanijaId
-                          group t by new { t, z.Plata } into g
-                          select new KompanijaDTO
-                          {
-                              Id = g.Key.t.Id,
-                              Naziv = g.Key.t.Naziv,
-                              GodinaOsnivanja = g.Key.t.GodinaOsnivanja,
-                              Average = g.Average(x => g.Key.Plata)
-                          }).ToList().OrderByDescending(x => x.Average);
+            var kompanije = (from kompanija in db.Kompanija
+                             join zaposleni in db.Zaposleni on kompanija.Id equals zaposleni.KompanijaId
+                             group new { kompanija, zaposleni } by new { kompanija.Id, kompanija.Naziv, kompanija.GodinaOsnivanja } into g
+                             select new KompanijaDTO
+                             {
+                                 Id = g.Key.Id,
+                                 Naziv = g.Key.Naziv,
+                                 GodinaOsnivanja = g.Key.GodinaOsnivanja,
+                                 Average = g.Average(x => x.zaposleni.Plata)
+                             }).ToList().OrderByDescending(x => x.Average);
+
             return kompanije;
         }
     }

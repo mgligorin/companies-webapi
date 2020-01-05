@@ -13,10 +13,9 @@ namespace MiroslavGligorinFinalniTest.Models
         [StringLength(50)]
         public string ImeIPrezime { get; set; }
         [Required]
-        [Range(1951, 1991)]
+        [Range(1950, 1992)]
         public int GodinaRodjenja { get; set; }
-        [Required]
-        [Range(2001, 2019)]
+        [Range(2001, int.MaxValue)]
         public int GodinaZaposlenja { get; set; }
         [Required]
         [Range(2000.01, 9999.99)]

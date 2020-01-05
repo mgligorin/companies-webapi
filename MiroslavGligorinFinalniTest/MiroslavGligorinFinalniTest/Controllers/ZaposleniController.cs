@@ -22,8 +22,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
         {
             return _repository.GetAll().OrderByDescending(x => x.Plata);
         }
-
-        [Authorize]
+        
         public IHttpActionResult Get(int id)
         {
             var zaposleni = _repository.GetById(id);
@@ -33,8 +32,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
             }
             return Ok(zaposleni);
         }
-
-        [Authorize]
+        
         public IHttpActionResult Post(Zaposleni zaposleni)
         {
             if (!ModelState.IsValid)
@@ -43,6 +41,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
             }
 
             _repository.Add(zaposleni);
+            zaposleni = _repository.GetById(zaposleni.Id);
             return CreatedAtRoute("DefaultApi", new { id = zaposleni.Id }, zaposleni);
         }
 
@@ -62,6 +61,7 @@ namespace MiroslavGligorinFinalniTest.Controllers
             try
             {
                 _repository.Update(zaposleni);
+                zaposleni = _repository.GetById(zaposleni.Id);
             }
             catch
             {
@@ -83,12 +83,11 @@ namespace MiroslavGligorinFinalniTest.Controllers
             _repository.Delete(zaposleni);
             return Ok();
         }
-
-        [Authorize]
+        
         [HttpGet]
         public IEnumerable<Zaposleni> Search(int godiste)
         {
-            return _repository.GetAll().Where(x => x.GodinaRodjenja > godiste).OrderByDescending(x => x.GodinaRodjenja);
+            return _repository.GetAll().Where(x => x.GodinaRodjenja > godiste).OrderBy(x => x.GodinaRodjenja);
         }
 
         [Authorize]
